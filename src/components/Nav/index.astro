@@ -1,0 +1,16 @@
+---
+import style from './style.module.scss'
+const {page} = Astro.props;
+---
+<nav class={style.nav}>
+    <ul>
+        {
+            page === 'users' ?
+                <li><a href="/users" style="background-color: #535dfc;">Usuarios</a></li>
+                <li><a href="/products">Productos</a></li>
+            :
+                <li><a href="/users">Usuarios</a></li>
+                <li><a href="/products" style="background-color: #535dfc;">Productos</a></li>
+        }
+    </ul>
+</nav>

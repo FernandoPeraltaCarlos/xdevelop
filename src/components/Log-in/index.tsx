@@ -28,6 +28,7 @@ function Form (){
             const res =await get_token(user,pass);
             localStorage.setItem('token',res);
             setValidUser('false')
+            window.location.href = '/users';
         }catch(err){
             console.log('Usuario no valido')
             setValidUser('true');
