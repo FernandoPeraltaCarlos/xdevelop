@@ -1,0 +1,31 @@
+---
+const {title} = Astro.props;
+import { ViewTransitions } from "astro:transitions";
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <ViewTransitions />
+</head>
+<body>
+    <slot />
+</body>
+<style is:global lang='scss'>
+    @mixin reset{
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
+    }
+    body{
+        width:100%;
+        @include reset;
+        *{
+            @include reset;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    }
+</style>
+</html>
