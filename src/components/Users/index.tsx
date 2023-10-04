@@ -3,11 +3,14 @@ import style from './style.module.scss'
 
 import { get_all_users, add_user } from '../../API/users';
 
-function Card ({id, names, mail, index, deleteUser}){
+function Card ({id, names, mail, index, deleteUser, data}){
 
     function deleteOfList(){
         deleteUser(index)
     }
+
+    delete data.username;
+    delete data.password;
 
     return(
         <li className={style.card}>
@@ -16,7 +19,7 @@ function Card ({id, names, mail, index, deleteUser}){
                 <p>{names.firstname} {names.lastname}</p>
                 <p>{mail}</p>
             </div>
-            <a href="#">Ver mas</a>
+            <a href={`/users/${id}?data=${JSON.stringify(data)}`}>Ver mas</a>
             <p onClick={deleteOfList}>X</p>
         </li>
     )
@@ -40,6 +43,9 @@ function Users (){
         getAllUsers();
     },[])
 
+    useEffect(()=>{
+        const data = users;
+    },[users])
 
 /* The function `sortByID` sorts an array of users by their ID in ascending or descending order and updates the state with the sorted array. */
     function sortByID (){
@@ -109,6 +115,7 @@ function Users (){
                     <li>Cargando....</li>:
                     users.map((user,index)=>(
                         <Card key={user.id} 
+                            data={user}
                             deleteUser={deleteUser} index={index} id={user.id} names={user.name} mail={user.email}/>
                     ))
                 }

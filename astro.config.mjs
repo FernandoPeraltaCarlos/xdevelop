@@ -5,6 +5,7 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
   integrations: [react()],
   /*   vite: {
       plugins: [million.vite({ mode: 'react', server: true, auto: true })]

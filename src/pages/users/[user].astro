@@ -1,0 +1,59 @@
+---
+import Main from '../../layouts/Main.astro';
+import Container from '../../layouts/Content.astro'
+
+let param = Astro.url.searchParams.get('data');
+let data = JSON.parse(param)
+---
+<Main>
+    <Container>
+        <section class="user">
+            <h1>{`${data ? data.name.firstname : 'Cargando...'} ${data ? data.name.lastname : 'Cargando...'}`}</h1>
+            <div class="group">
+                <p>Email: {data ? data.email : 'Cargando...'}</p>
+                <p>Telefono: {data ? data.phone : 'Cargando...'}</p>
+            </div>
+            <div class="group">
+                <h4>Direccion</h4>
+                <p>Ciudad: {data ? data.address.city : 'Cargando...'}</p>
+                <p>Calle: {data ? data.address.street : 'Cargando...'}</p>
+                <p>Numero: {data ? data.address.number : 'Cargando...'}</p>
+                <p>CP: {data ? data.address.zipcode : 'Cargando...'}</p>
+                <p>Latitud: {data ? data.address.geolocation.lat : 'Cargando...'}</p>
+                <p>Longitud: {data ? data.address.geolocation.long : 'Cargando...'}</p>
+            </div>
+        </section>
+    </Container>
+</Main>
+
+<style lang="scss">
+    .user{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.15);
+        width: clamp(350px,60%,700px);
+        padding: 2em;
+        margin-top: 2em;
+        row-gap: 1em;
+        h1{
+            color:white;
+            font-size: clamp(1rem,100vw,2rem);
+        }
+    }
+    .group{
+        h4{
+            font-weight: bold;
+            font-size: clamp(.8rem,100vw,1.2rem);
+            color:white;
+            padding-bottom: .4em;
+        }
+        p{
+            color:white;
+            font-size: clamp(.6rem,100vw,1rem);
+        }
+    }
+</style>
