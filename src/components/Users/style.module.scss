@@ -16,6 +16,10 @@
         align-items: flex-start;
         justify-content: center;
         list-style: none;
+        li {
+            color: white;
+            font-size: clamp(0.6rem, 100vw, 0.8rem);
+        }
     }
 }
 
@@ -35,7 +39,7 @@
         align-items: center;
     }
     &:hover {
-        box-shadow: 0 0 20px -5px;
+        box-shadow: 0 0 20px -5px black;
     }
     p:last-of-type {
         &:hover {

@@ -84,11 +84,17 @@ function Users (){
         setUsers(userCopy)
     }
 
+/* The function "reset" sets the state of users to its original value.*/
+    function reset(){
+        setUsers(originalUsers);
+    }
+
     return(
         <section className={style.users}>
             <div className={style.orderList}>
                 <p onClick={sortByID} >Ordenar por Id</p>
                 <p onClick={sortByEmail} >Ordenar por Correo</p>
+                <p onClick={reset}>Reiniciar</p>
             </div>
             <ul>
                 {
