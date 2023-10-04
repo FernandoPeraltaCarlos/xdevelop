@@ -1,10 +1,12 @@
 ---
 import Main from '../../layouts/Main.astro';
 import Container from '../../layouts/Content.astro'
-import { Image } from 'astro:assets';
 
-let param:any = Astro.url.searchParams.get('data');
-let data:any = JSON.parse(param);
+let param:any = Astro.url.searchParams.get('data'); // Obtener el parámetro de la URL
+param = decodeURIComponent(param); // Decodificar la cadena
+param = param.replace(/%20/g, ' '); // Reemplazar '%20' por espacios en blanco
+let data = JSON.parse(param); // Analizar como JSON
+
 ---
 <Main>
     <Container>
@@ -17,7 +19,7 @@ let data:any = JSON.parse(param);
             <div class="group">
                 <p>Categoria: {data ? data.category : 'Cargando...'}</p>
                 <figure>
-                    <Image width='250' height='250'  src={data ? data.image : '#'} alt="product-image">
+                    <img width='250' height='250'  src={data ? data.image : '#'} alt="product-image">
                 </figure>
                 <p>Calificacion: {data ? data.rating.rate : 'Cargando...'}</p>
                 <p>Cantidad: {data ? data.rating.count : 'Cargando...'}</p>
@@ -25,12 +27,6 @@ let data:any = JSON.parse(param);
         </section>
     </Container>
 </Main>
-<script>
-    const token = localStorage.getItem('token');
-    if(!token){
-        window.location.href = '/';
-    }
-</script>
 
 <style lang="scss">
     .user{
