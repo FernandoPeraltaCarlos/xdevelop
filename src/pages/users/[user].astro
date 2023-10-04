@@ -25,6 +25,12 @@ let data = JSON.parse(param)
         </section>
     </Container>
 </Main>
+<script>
+    const token = localStorage.getItem('token');
+    if(!token){
+        window.location.href = '/';
+    }
+</script>
 
 <style lang="scss">
     .user{

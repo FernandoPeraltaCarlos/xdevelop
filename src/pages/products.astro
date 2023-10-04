@@ -11,3 +11,9 @@ import Container from '../layouts/Content.astro';
         <ProductsList client:only="react" />
     </Container>
 </Main>
+<script>
+    const token = localStorage.getItem('token');
+    if(!token){
+        window.location.href = '/';
+    }
+</script>
