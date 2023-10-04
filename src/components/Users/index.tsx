@@ -20,6 +20,7 @@ function Users (){
     const [users, setUsers] = useState([]);
     const [originalUsers, setOriginalUsers] = useState([]);
     const [sortId, setSortId] = useState(true);
+    const [sortEmail, setSortEmail] = useState(true);
 
     useEffect(()=>{
         async function getAllUsers (){
@@ -42,11 +43,34 @@ function Users (){
         setUsers(usersCopy)
     }
 
+    function sortByEmail (){
+        let usersCopy = [...users];
+        if(sortEmail){
+            usersCopy.sort((a,b) => {
+                if(a.email < b.email){
+                    return -1;
+                }else if(a.email > b.email){
+                    return 1
+                }
+            })
+        }else{
+            usersCopy.sort((a,b) => {
+                if(a.email < b.email){
+                    return 1;
+                }else if(a.email > b.email){
+                    return -1
+                }
+            })
+        }
+        setSortEmail(!sortEmail);
+        setUsers(usersCopy)
+    }
+
     return(
         <section className={style.users}>
             <div className={style.orderList}>
                 <p onClick={sortByID} >Ordenar por Id</p>
-                <p>Ordenar por Correo</p>
+                <p onClick={sortByEmail} >Ordenar por Correo</p>
             </div>
             <ul>
                 {
