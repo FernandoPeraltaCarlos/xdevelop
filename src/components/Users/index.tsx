@@ -1,7 +1,7 @@
 import react,{useEffect, useState} from 'react';
 import style from './style.module.scss'
 
-import { get_all_users } from '../../API/users';
+import { get_all_users, add_user } from '../../API/users';
 
 function Card ({id, names, mail, index, deleteUser}){
 
@@ -43,19 +43,19 @@ function Users (){
 
 /* The function `sortByID` sorts an array of users by their ID in ascending or descending order and updates the state with the sorted array. */
     function sortByID (){
-        let usersCopy = [...users];
+        let usersCopy = structuredClone(users);
         if(sortId){
             usersCopy.sort((a,b) => {return b.id - a.id})
         }else{
             usersCopy.sort((a,b) => {return a.id - b.id})
         }
         setSortId(!sortId);
-        setUsers(usersCopy)
+        setUsers([...usersCopy])
     }
 
 /*The function `sortByEmail` sorts an array of users by their email in ascending or descending order, toggling the sorting order each time it is called.*/
     function sortByEmail (){
-        let usersCopy = [...users];
+        let usersCopy = structuredClone(users);
         if(sortEmail){
             usersCopy.sort((a,b) => {
                 if(a.email < b.email){
@@ -74,19 +74,25 @@ function Users (){
             })
         }
         setSortEmail(!sortEmail);
-        setUsers(usersCopy)
+        setUsers([...usersCopy])
     }
 
 /**The deleteUser function removes a user from an array of users and updates the state with the updated array.@param index - The index parameter represents the index of the user that needs to be deleted from the users array.*/
     function deleteUser (index){
-        let userCopy = [...users];
+        let userCopy = structuredClone(users);
         userCopy.splice(index,1)
-        setUsers(userCopy)
+        setUsers([...userCopy])
     }
 
 /* The function "reset" sets the state of users to its original value.*/
     function reset(){
         setUsers(originalUsers);
+    }
+
+    async function addUser (){
+        let usersCopy = [...users];
+        const newUser = await add_user();
+        setUsers([...usersCopy, newUser]);
     }
 
     return(
@@ -95,6 +101,7 @@ function Users (){
                 <p onClick={sortByID} >Ordenar por Id</p>
                 <p onClick={sortByEmail} >Ordenar por Correo</p>
                 <p onClick={reset}>Reiniciar</p>
+                <p onClick={addUser} >Agregar usuario</p>
             </div>
             <ul>
                 {
