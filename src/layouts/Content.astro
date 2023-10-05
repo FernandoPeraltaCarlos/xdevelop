@@ -4,7 +4,7 @@
 <section class="closeSession">
     <button id="close">Cerrar sesion</button>
 </section>
-<script>
+<script is:inline>
     const token = localStorage.getItem('token');
     if(!token){
         window.location.href = '/';
@@ -15,7 +15,7 @@
         location.reload();
     }
 
-    let button = document.querySelector('#close') as HTMLButtonElement;
+    let button = document.querySelector('#close') ;
     button.onclick = function (){
         closeSession();
     }

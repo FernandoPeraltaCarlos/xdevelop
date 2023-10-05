@@ -1,0 +1,13 @@
+---
+import Main from '../layouts/Main.astro'
+import Nav from '../components/Nav/index.astro'
+import ProductsList from '../components/Products/index'
+import Container from '../layouts/Content.astro';
+---
+
+<Main title="Productos">
+    <Container>
+        <Nav page="products" />
+        <ProductsList client:only="react" />
+    </Container>
+</Main>
